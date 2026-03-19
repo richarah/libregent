@@ -90,6 +90,6 @@ int main() {
     }
     std::cout << "\n";
 
-    std::cout << "✓ Integration tests completed successfully!\n";
+    std::cout << "[OK] Integration tests completed successfully!\n";
     return 0;
 }

@@ -38,10 +38,10 @@ int main() {
     std::cout << "Total rules (get_all_rules): " << all_rules.size() << "\n";
 
     if (sum == all_rules.size()) {
-        std::cout << "\n✓ All rules accounted for!\n";
+        std::cout << "\n[OK] All rules accounted for!\n";
         return 0;
     } else {
-        std::cout << "\n✗ Mismatch in rule counts!\n";
+        std::cout << "\n[FAIL] Mismatch in rule counts!\n";
         return 1;
     }
 }

@@ -18,7 +18,7 @@ class DepGraph;
 
 /// Bindings from variable names to token IDs (used by rules and dep_graph)
 struct Bindings {
-    std::unordered_map<std::string, uint32_t> vars;  // "??X0" → token_id
+    std::unordered_map<std::string, uint32_t> vars;  // "??X0" -> token_id
     bool success = false;
 };
 

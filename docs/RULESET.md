@@ -8,7 +8,7 @@ Reconstructed from: Siddharthan (2003 PhD thesis, Cambridge Tech Report 597), Si
 
 ## Part 1: System Architecture
 
-Three-stage pipeline: **Analysis → Transformation → Regeneration**
+Three-stage pipeline: **Analysis -> Transformation -> Regeneration**
 
 ### 1.1 Analysis Stage
 
@@ -34,7 +34,7 @@ Operates as a **recursive stack-based algorithm**:
 2. LOOP:
    a. Pop top sentence from stack
    b. BASE CASE: sentence contains no simplifiable construct
-      → append to output queue
+      -> append to output queue
    c. RECURSIVE CASE:
       i.   Apply highest-priority applicable transformation rule
       ii.  Rule produces two sentences (a, b) and a relation R
@@ -89,7 +89,7 @@ The relation R determines sentence ordering, cue-word selection, and determiner 
 |---|---|---|
 | `although, though, whereas, but, however` | (a, Concession, b) | |
 | `or, or else` | (a, Anti-Conditional, b) | |
-| `because` | (a, Cause, b) → converted to (b, Result, a) | Clause order reversed |
+| `because` | (a, Cause, b) -> converted to (b, Result, a) | Clause order reversed |
 | `and` | (a, And, b) | Underspecified relation |
 | `when` | (a, When, b) | |
 | `before` | (a, Before, b) | |
@@ -192,9 +192,9 @@ OUT: "A man had brought it in for an estimate. This man returned to collect it."
 ```
 
 **Exceptions to indefinite determiner**:
-- **Numerical attributes present**: "He was involved in two conversions which turned out to be crucial." → "He was involved in two conversions. These conversions turned out to be crucial." (no `a/some`)
-- **Proper nouns**: No determiner change. "Mr. Anthony who runs..." → "Mr. Anthony runs..."
-- **Adjectival pronouns present**: No determiner change. "his latest book which..." → "his latest book..."
+- **Numerical attributes present**: "He was involved in two conversions which turned out to be crucial." -> "He was involved in two conversions. These conversions turned out to be crucial." (no `a/some`)
+- **Proper nouns**: No determiner change. "Mr. Anthony who runs..." -> "Mr. Anthony runs..."
+- **Adjectival pronouns present**: No determiner change. "his latest book which..." -> "his latest book..."
 
 **Sentence order**: Soft constraint for Identification prefers the identifying clause first (b before a), so the referent is established before being used.
 
@@ -255,7 +255,7 @@ Each rule specifies five components:
 - **Node deletion**: Remove a node from the tree, reassigning its dependents to a specified parent.
   - `Node ??X2: Target=??X0` (move ??X2's dependents to ??X0, then delete ??X2)
 
-### 3.2 Passive → Active Voice Conversion
+### 3.2 Passive -> Active Voice Conversion
 
 **Typed dependency pattern**:
 ```
@@ -335,7 +335,7 @@ OUT: "The army destroyed the city."
 
 These require:
 - Node deletion (removing copular verbs, prepositions)
-- Lexical substitution (suffix changes: `-tion` → verb form, `-ed` → `-ing`)
+- Lexical substitution (suffix changes: `-tion` -> verb form, `-ed` -> `-ing`)
 - Subtree reordering
 - Insertion of new function words
 
@@ -351,7 +351,7 @@ These require:
 | Reduced relative clauses | Present participle (`NP VP-ing`), past participle (`NP VP-ed`), infinitival (`NP to VP`) | ~3 |
 | Non-restrictive apposition | `NP, NP-appositive, VP`; parenthetical `NP (NP) VP` | ~5 |
 | Restrictive apposition | Title/role appositives | ~3 |
-| Passive → active | Simple, modal, perfect, ditransitive variants | ~5 |
+| Passive -> active | Simple, modal, perfect, ditransitive variants | ~5 |
 | Complex lexico-syntactic | Causality reformulation, nominalisation unpacking, other structural rewrites | ~7 |
 
 ---
@@ -453,7 +453,7 @@ ALGORITHM Order-Sentences((a, R, b), C):
 2. PROCESS R: Add new constraints to C, Ca, Cb as specified in §5.3.
 
 3. CHECK HARD CONSTRAINTS (a before b):
-   IF C contains hard constraints: (a→b) or ("a is first") or ("b is last")
+   IF C contains hard constraints: (a->b) or ("a is first") or ("b is last")
    THEN:
      IF no conflicting hard constraints exist:
        RETURN order=(a, b), Ca, Cb
@@ -461,7 +461,7 @@ ALGORITHM Order-Sentences((a, R, b), C):
        RETURN fail (abort this transform)
 
 4. CHECK HARD CONSTRAINTS (b before a):
-   IF C contains hard constraints: (b→a) or ("b is first") or ("a is last")
+   IF C contains hard constraints: (b->a) or ("b is first") or ("a is last")
    THEN:
      IF no conflicting hard constraints exist:
        RETURN order=(b, a), Cb, Ca
@@ -532,7 +532,7 @@ Local ordering with adjacency preservation is equivalent to global ordering with
 |---|---|---|---|
 | `although, though, whereas, but, however` | Concession | `But,` | Start of sentence 2 |
 | `or, or else` | Anti-Conditional | `Otherwise,` | Start of sentence 2 |
-| `because` | Cause → Result | `So,` | Start of sentence 2 (= original main clause) |
+| `because` | Cause -> Result | `So,` | Start of sentence 2 (= original main clause) |
 | `and` | And | `And` (or nothing) | Start of sentence 2 |
 | `when` | When | `This was/is when` | Start of sentence 2 |
 | `before` | Before | `This was/is before` | Start of sentence 2 |
@@ -602,10 +602,10 @@ OUT: "A man had brought it in for an estimate. This man returned to collect it."
 
 | Condition | Behaviour | Example |
 |---|---|---|
-| **Numerical attribute present** | Keep original determiner | "two conversions which..." → "two conversions. These conversions..." |
-| **Proper noun as head** | No determiner added/changed | "Mr. Anthony who..." → "Mr. Anthony..." |
-| **Adjectival pronoun present** | No determiner added/changed | "his latest book which..." → "his latest book..." |
-| **Demonstrative already present** | No change | "that policy which..." → "that policy..." |
+| **Numerical attribute present** | Keep original determiner | "two conversions which..." -> "two conversions. These conversions..." |
+| **Proper noun as head** | No determiner added/changed | "Mr. Anthony who..." -> "Mr. Anthony..." |
+| **Adjectival pronoun present** | No determiner added/changed | "his latest book which..." -> "his latest book..." |
+| **Demonstrative already present** | No change | "that policy which..." -> "that policy..." |
 
 ---
 
@@ -650,8 +650,8 @@ More complex disambiguation (adding modifiers) is invoked only when the default 
 ### 8.4 Animacy Information
 
 WordNet is used to determine animacy of head nouns:
-- Animate → pronoun candidates: `he/she/they`
-- Inanimate → pronoun candidates: `it/they`
+- Animate -> pronoun candidates: `he/she/they`
+- Inanimate -> pronoun candidates: `it/they`
 
 Animacy information is used for both referring expression generation and pronoun resolution.
 
@@ -673,12 +673,12 @@ ALGORITHM Fix-Pronominal-Links:
 FOR every pronoun P in the simplified text (excluding "it"):
   1. Compute salience list S_orig at P's position in the original text
   2. Compute salience list S_simp at P's position in the simplified text
-  3. Find immediate antecedent of P in original text → A_orig_imm
-  4. Find absolute antecedent of P in original text → A_orig_abs
-  5. Find immediate antecedent of P in simplified text → A_simp_imm
-  6. Find absolute antecedent of P in simplified text → A_simp_abs
+  3. Find immediate antecedent of P in original text -> A_orig_imm
+  4. Find absolute antecedent of P in original text -> A_orig_abs
+  5. Find immediate antecedent of P in simplified text -> A_simp_imm
+  6. Find absolute antecedent of P in simplified text -> A_simp_abs
   
-  7. IF (A_simp_imm ≠ A_orig_imm) AND (A_simp_abs ≠ A_orig_abs):
+  7. IF (A_simp_imm != A_orig_imm) AND (A_simp_abs != A_orig_abs):
        REPLACE P with referring expression for A_orig_abs
 ```
 
@@ -706,8 +706,8 @@ The salience list is computed by the pronoun resolution component (Siddharthan 2
 ```
 Original salience at "he": [Mr Blunkett, security breach, comedian, Prince William, ...]
 Simplified salience at "he": [this breach, comedian, Prince William, ..., Mr Blunkett, ...]
-→ "he" would resolve to "breach" (animate mismatch would catch this, but still — salience has shifted)
-→ REPLACE "he" with "Mr Blunkett"
+-> "he" would resolve to "breach" (animate mismatch would catch this, but still — salience has shifted)
+-> REPLACE "he" with "Mr Blunkett"
 ```
 
 ### 9.6 Attentional State Restoration
@@ -732,7 +732,7 @@ Deduct one point for each:
 2. Word repetition within a sentence ("is is", "to to")
 3. Preposition followed by subject pronoun ("of he", "for she")
 4. Bad conjunction/preposition sequences ("because but", "until for")
-5. Very short sentence (≤ 4 words)
+5. Very short sentence (<= 4 words)
 6. Output has far fewer words than input (excessive deletion suggests misparse)
 
 ### 10.3 Ranking: Positive Signals
@@ -744,9 +744,9 @@ Deduct one point for each:
 ### 10.4 Results
 
 Using 50-best parses improved:
-- Transforms per sentence: 0.65 → 0.74 (+14%)
-- Sentences modified: 50.2% → 55.4% (+5%)
-- Accuracy (gen-light): 83.9% → 87.9% (+4%)
+- Transforms per sentence: 0.65 -> 0.74 (+14%)
+- Sentences modified: 50.2% -> 55.4% (+5%)
+- Accuracy (gen-light): 83.9% -> 87.9% (+4%)
 
 ---
 
@@ -803,7 +803,7 @@ Based on evaluation results: use **gen-heavy for verb features only** (tense, mo
 
 Three judges (native English speakers with computational linguistics background).
 
-| Metric | Unanimous agreement | Majority vote (≥2 of 3) |
+| Metric | Unanimous agreement | Majority vote (>=2 of 3) |
 |---|---|---|
 | Grammatical | 80.0% | 94.7% |
 | Meaning-preserving | 85.3% | 94.7% |
@@ -813,7 +813,7 @@ Three judges (native English speakers with computational linguistics background)
 - Average across all examples: **2.43**
 - 41% scored 3 unanimously (no loss)
 - 75% averaged above 2 (little or no loss)
-- 8% averaged ≤ 1 (significant incoherence)
+- 8% averaged <= 1 (significant incoherence)
 
 **Error sources**: Most meaning-altering errors came from incorrect relative clause attachment in the analysis module, not from the transformation or regeneration rules.
 
@@ -842,14 +842,14 @@ Of 95 simplified sentences:
 
 ### 12.5 Readability Improvement (2006, 15 reports per source)
 
-| News source | Flesch Reading Ease (orig → simp) | Avg sentence length (orig → simp) |
+| News source | Flesch Reading Ease (orig -> simp) | Avg sentence length (orig -> simp) |
 |---|---|---|
-| Wall Street Journal | ~40 → ~55 | ~25 → ~15 |
-| Guardian | ~45 → ~60 | ~23 → ~15 |
-| New York Times | ~42 → ~57 | ~24 → ~15 |
-| Cambridge Evening News | ~52 → ~65 | ~20 → ~15 |
-| Daily Mirror | ~55 → ~68 | ~18 → ~15 |
-| BBC News Online | ~54 → ~67 | ~20 → ~15 |
+| Wall Street Journal | ~40 -> ~55 | ~25 -> ~15 |
+| Guardian | ~45 -> ~60 | ~23 -> ~15 |
+| New York Times | ~42 -> ~57 | ~24 -> ~15 |
+| Cambridge Evening News | ~52 -> ~65 | ~20 -> ~15 |
+| Daily Mirror | ~55 -> ~68 | ~18 -> ~15 |
+| BBC News Online | ~54 -> ~67 | ~20 -> ~15 |
 
 The system converges average sentence length to approximately **15 words** regardless of source complexity.
 
@@ -864,10 +864,10 @@ Sometimes the ordering that preserves conjunctive cohesion (rhetorical relations
 ```
 IN:  "Dr. Knudson found that some children with the eye cancer had inherited a damaged copy of chromosome No. 13 from a parent, who had necessarily had the disease."
 
-Ordering for conjunctive cohesion (elaboration → satellite second):
+Ordering for conjunctive cohesion (elaboration -> satellite second):
 OUT: "Dr. Knudson found that some children with the eye cancer had inherited a damaged copy of chromosome No. 13 from a parent. This parent had necessarily had the disease."
-→ This disrupts attentional state: "parent" becomes most salient, so "he" in the next sentence is ambiguous.
-→ Post-processor detects this and replaces "he" with "Dr. Knudson".
+-> This disrupts attentional state: "parent" becomes most salient, so "he" in the next sentence is ambiguous.
+-> Post-processor detects this and replaces "he" with "Dr. Knudson".
 ```
 
 ### 13.2 Semantic-Level Coherence Loss
@@ -943,7 +943,7 @@ INSERT:
 CUE-WORD:
   Prepend "So, " to sentence containing X0
 
-RELATION: (a, Cause, b) → rewritten as (b, Result, a)
+RELATION: (a, Cause, b) -> rewritten as (b, Result, a)
 ORDER: b precedes a (reversed)
 ```
 
@@ -1040,7 +1040,7 @@ INSERT:
 RELATION: (a, Elaboration, b)
 ```
 
-### 14.9 Passive → Active
+### 14.9 Passive -> Active
 
 ```
 CONTEXT & DELETE:
@@ -1118,9 +1118,9 @@ Dependencies:
 Step 1 — Apply relative clause rule:
   DELETE: rcmod(dog-7, barking-10), nsubj(barking-10, dog-7)
   INSERT: nsubj(barking-10, dog-7)
-  → Now two trees: "chased" tree and "barking" tree
+  -> Now two trees: "chased" tree and "barking" tree
 
-Step 2 — Apply passive→active rule to "chased" tree:
+Step 2 — Apply passive->active rule to "chased" tree:
   DELETE: nsubjpass, auxpass, agent
   INSERT: nsubj(chased-4, dog-7), dobj(chased-4, cat-2)
 
@@ -1134,20 +1134,20 @@ Final output:
 
 | Relation | Source construct | Constraint type | Preferred order | Cue word |
 |---|---|---|---|---|
-| Concession | `although/though/but/however/whereas` | Hard: a→b | a, b | `But,` |
-| Anti-Conditional | `or/or else` | Hard: a→b | a, b | `Otherwise,` |
-| Result | `because` (reversed) | Hard: b→a | b, a | `So,` |
-| And | `and` | Hard: a→b | a, b | `And` / ∅ |
-| When | `when` | Hard: a→b | a, b | `This was/is when` |
-| Before | `before` | Hard: a→b | a, b | `This was/is before` |
-| After | `after` | Hard: a→b | a, b | `This was/is after` |
-| Since | `since` | Hard: a→b | a, b | `This is/was since` |
-| As | `as` | Hard: a→b | a, b | `This is/was as` |
-| While | `while` | Hard: a→b | a, b | `This is/was while` |
-| If | `if` | Hard: a→b | a, b | `This is/was if` |
-| Unless | `unless` | Hard: a→b | a, b | `This is/was unless` |
-| Elaboration | Non-restrictive RC / appositive | Soft: a→b | a, b (flexible) | ∅ |
-| Identification | Restrictive RC / appositive | Soft: b→a | b, a (flexible) | ∅ |
+| Concession | `although/though/but/however/whereas` | Hard: a->b | a, b | `But,` |
+| Anti-Conditional | `or/or else` | Hard: a->b | a, b | `Otherwise,` |
+| Result | `because` (reversed) | Hard: b->a | b, a | `So,` |
+| And | `and` | Hard: a->b | a, b | `And` / empty |
+| When | `when` | Hard: a->b | a, b | `This was/is when` |
+| Before | `before` | Hard: a->b | a, b | `This was/is before` |
+| After | `after` | Hard: a->b | a, b | `This was/is after` |
+| Since | `since` | Hard: a->b | a, b | `This is/was since` |
+| As | `as` | Hard: a->b | a, b | `This is/was as` |
+| While | `while` | Hard: a->b | a, b | `This is/was while` |
+| If | `if` | Hard: a->b | a, b | `This is/was if` |
+| Unless | `unless` | Hard: a->b | a, b | `This is/was unless` |
+| Elaboration | Non-restrictive RC / appositive | Soft: a->b | a, b (flexible) | empty |
+| Identification | Restrictive RC / appositive | Soft: b->a | b, a (flexible) | empty |
 
 ## Appendix B: Summary of Determiner Rules
 

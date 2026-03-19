@@ -23,7 +23,7 @@ private:
     /// Determine auxiliary tense ("is" or "was") from the nucleus
     [[nodiscard]] std::string determine_aux(const DepGraph& nucleus) const;
 
-    /// Static mapping from Relation → cue-word template
+    /// Static mapping from Relation -> cue-word template
     static const std::unordered_map<Relation, std::string> templates_;
 };
 

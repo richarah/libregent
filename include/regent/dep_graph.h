@@ -38,7 +38,7 @@ public:
     ~DepGraph() = default;
 
     /// Pattern matching: try to unify a rule's CONTEXT against this graph
-    /// Returns bindings (variable name → token id) if successful
+    /// Returns bindings (variable name -> token id) if successful
     [[nodiscard]] regent::Bindings match(const std::vector<DepPattern>& patterns) const;
 
     /// Mutation: apply DELETE, INSERT, NODE-OPS to produce a new graph

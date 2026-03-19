@@ -117,24 +117,24 @@ void SentenceOrderer::add_relation_constraints(
     // Add constraints based on relation type
     switch (R) {
         case Relation::Result:
-            // "because" reversed: hard b→a
+            // "because" reversed: hard b->a
             C.push_back({ConstraintType::Hard, OrderConstraint::BPrecedesA});
             Ca.push_back({ConstraintType::Soft, OrderConstraint::NucleusFirst});
             Cb.push_back({ConstraintType::Soft, OrderConstraint::NucleusLast});
             break;
 
         case Relation::Elaboration:
-            // Non-restrictive: soft a→b
+            // Non-restrictive: soft a->b
             C.push_back({ConstraintType::Soft, OrderConstraint::APrecedesB});
             break;
 
         case Relation::Identification:
-            // Restrictive: soft b→a
+            // Restrictive: soft b->a
             C.push_back({ConstraintType::Soft, OrderConstraint::BPrecedesA});
             break;
 
         default:
-            // Most relations: hard a→b
+            // Most relations: hard a->b
             C.push_back({ConstraintType::Hard, OrderConstraint::APrecedesB});
             Ca.push_back({ConstraintType::Soft, OrderConstraint::NucleusLast});
             Cb.push_back({ConstraintType::Soft, OrderConstraint::NucleusFirst});

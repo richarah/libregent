@@ -2,6 +2,14 @@
 
 A C++20 library for rule-based syntactic text simplification, based on the RegenT system by Siddharthan et al.
 
+### Why does this exist?
+
+Because philologists and computer scientists don't talk enough.
+
+The former understand the complexity of meaning but rarely ship software. The latter ship software but treat meaning as a loss function. What tooling exists is proprietary, academic Java from decades past, or Python wrappers around Python wrappers: none of it fast, none of it embeddable, none of it intended to outlive a paper.
+
+libregent is what this work looks like when someone gets annoyed enough to fix it.
+
 ## Overview
 
 libregent takes dependency-parsed sentences and produces syntactically simplified text. It splits complex sentences into shorter ones, converts passive voice to active, simplifies relative clauses and coordination, and maintains proper discourse coherence with cue words and referring expressions.
@@ -10,7 +18,7 @@ This is a pure C++ implementation with no runtime ML dependencies, with optional
 
 ## Features
 
-- 63+ transformation rules covering coordination, subordination, relative clauses, apposition, passive voice, and complex lexico-syntactic reformulations
+- 60+ transformation rules covering coordination, subordination, relative clauses, apposition, passive voice, and complex lexico-syntactic reformulations
 - CSP-based sentence ordering algorithm that preserves conjunctive cohesion
 - Intelligent determiner choice and noun phrase generation
 - Anaphoric post-processing to fix broken pronominal links after restructuring
@@ -194,10 +202,10 @@ The system uses a three-stage pipeline:
 1. Push parsed sentence onto stack
 2. While stack not empty:
    a. Pop sentence
-   b. If no simplifiable construct → output
+   b. If no simplifiable construct -> output
    c. Else:
       i.   Find highest-priority matching rule
-      ii.  Apply transformation → produces (a, R, b)
+      ii.  Apply transformation -> produces (a, R, b)
       iii. Run sentence ordering CSP
       iv.  Push both sentences back (in decided order)
 3. Run anaphoric post-processor on output
@@ -206,7 +214,7 @@ The system uses a three-stage pipeline:
 
 ## Performance
 
-- Sentence length reduction: ~40% average (e.g. 25 words → 15 words)
+- Sentence length reduction: ~40% average (e.g. 25 words -> 15 words)
 - Readability improvement: Flesch Reading Ease typically increases by 10-15 points
 - Accuracy: ~88% grammatical and meaning-preserving (gen-light with 50-best parses)
 - Throughput: ~1000 sentences per second, per thread, on modern CPU
@@ -270,20 +278,6 @@ Contributions welcome! Please:
 2. Add tests for new functionality
 3. Update documentation
 4. Ensure all tests pass before submitting PR
-
-## Roadmap
-
-- Complete all 63+ rules in rule registry
-- Full anaphoric post-processing with salience model
-- XML rule loading from external files
-- UDPipe integration for self-contained parsing
-- Improved morphological generation
-- WordNet integration for animacy and disambiguation
-- Advanced referring expression generation
-- Full CSP constraint satisfaction for sentence ordering
-- Documentation with worked examples
-- Python package on PyPI
-- Comprehensive evaluation on standard corpora
 
 ## Acknowledgments
 
