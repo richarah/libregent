@@ -2,10 +2,6 @@
 
 A C++20 library for rule-based syntactic text simplification, based on the RegenT system.
 
-#### Why does this exist?
-
-Siddharthan et al. proved it works. Nobody compiled it. Here's some C++ and a makefile.
-
 ## Overview
 
 libregent takes dependency-parsed sentences and produces syntactically simplified text. It splits complex sentences into shorter ones, converts passive voice to active, simplifies relative clauses and coordination, and maintains proper discourse coherence with cue words and referring expressions.
